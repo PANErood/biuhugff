@@ -1,0 +1,97 @@
+body {
+    margin: 0;
+    overflow: hidden; /* Oculta las barras de desplazamiento */
+    background-color: black; /* Fondo negro como pediste */
+    cursor: pointer; /* Cambia el cursor para indicar que es interactivo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ocupa toda la altura de la ventana */
+    position: relative; /* Para posicionar el mensaje central */
+}
+
+/* Estilo para el mensaje central "Nayra te amo" */
+#central-message {
+    position: relative; /* Cambiado de absolute a relative para que se centre mejor con flexbox */
+    z-index: 10; /* Asegura que el mensaje esté por encima de los corazones */
+    color: white; /* Color de texto blanco */
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para el mensaje */
+    padding: 30px 50px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); /* Sombra suave */
+    animation: fadeInScale 2s ease-out forwards; /* Animación de aparición */
+}
+
+#central-message h1 {
+    font-size: 5em; /* Tamaño grande para "Nayra" */
+    margin: 0;
+    line-height: 1;
+    color: #FF69B4; /* Rosa cálido para Nayra */
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+}
+
+#central-message p {
+    font-size: 3em; /* Tamaño para "Te amo" */
+    margin-top: 10px;
+    color: #FFB6C1; /* Rosa claro para "Te amo" */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+}
+
+/* Contenedor para la lluvia de corazones (divs HTML) */
+#heart-rain-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Permite hacer clic a través de los corazones */
+    overflow: hidden; /* Asegura que los corazones no se salgan */
+    z-index: 5; /* Por debajo del mensaje central */
+}
+
+/* Estilo para cada corazón de la lluvia */
+.heart {
+    position: absolute;
+    font-size: 2em; /* Tamaño de los corazones que caen */
+    animation: fall linear infinite; /* Animación de caída */
+    opacity: 0; /* Empiezan invisibles */
+    transform: translateY(-10vh); /* Empiezan fuera de la pantalla */
+    pointer-events: none; /* No se puede hacer clic en ellos */
+}
+
+/* Colores de los corazones que caen */
+.heart.red { color: red; }
+.heart.white { color: white; }
+
+/* Canvas para los corazones que brotan */
+#heart-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 20; /* Por encima de todo para capturar clics */
+    pointer-events: auto; /* Permite capturar clics */
+}
+
+/* Animación para la caída de los corazones */
+@keyframes fall {
+    to {
+        transform: translateY(100vh); /* Caída hasta el final de la pantalla */
+        opacity: 1; /* Se hacen visibles */
+    }
+}
+
+/* Animación para la aparición del mensaje central */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
